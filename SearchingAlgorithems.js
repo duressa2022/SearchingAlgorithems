@@ -86,4 +86,74 @@ function breadthFirstSearch(array,root,key){
     }
     return false
 }
-
+function DepthFirstGraphSearch(graph,source,key,visted=[]){
+    if(source==key){
+        return true
+    }
+    visted.push(source)
+    for(let neighbor of graph[source]){
+        if(!(neighbor in visted)){
+            DepthFirstGraphSearch(graph,neighbor,key,visted)
+        }
+    }
+    return false
+}
+function preOrderSearchUsingStack(array,root,key){
+    let stack=[root]
+    while(stack.length!=0){
+       let current=stack.pop()
+        if(current==key){
+            return true
+        }
+        if(current*2+1<array.length){
+            stack.push(current*2+1)
+        }
+        if(current*2+2<array.length){
+            stack.push(current*2+2)
+        }
+    }
+    return false
+}
+function inOrderSearchingUsinStack(array,root,key){
+    let stack=[]
+    let current=root
+    while(stack.length || current<array.length){
+        while(current<array.length){
+            stack.push(current)
+            current=current*2+1
+        }
+        if(stack.length>0){
+            let temp=stack.pop()
+            if(array[temp]==key){
+                return true
+            }
+            current=temp*2+2
+        }
+    }
+    return false
+}
+function postOrderSearchUsingStack(array,root,key){
+    let stack=[]
+    let current=root
+    while(stack.length>0 || current<stack.length){
+        while(current<stack.length){
+            stack.push(current)
+            if(current*2+2<array.length){
+                stack.push(null)
+            }
+            current=current*2+1
+        }
+        if(stack.length>0){
+            temp=stack.pop()
+            if(temp!=null){
+                if(array[temp]==key){
+                    return true
+                }
+            }else{
+                temp=stack.pop()
+                stack.push(temp)
+                current=temp*2+2
+            }
+        }
+    }return false
+}
