@@ -70,4 +70,20 @@ function postOrderSearch(array,root,key){
     }
     return false
 }
+function breadthFirstSearch(array,root,key){
+    let queue=[root]
+    while(queue.length!=0){
+        current=queue.shift()
+        if(array[current]==key){
+            return true
+        }
+        if(current*2+1<array.length){
+            queue.push(current*2+1)
+        }
+        if(current*2+2<array.length){
+            queue.push(current*2+2)
+        }
+    }
+    return false
+}
 
