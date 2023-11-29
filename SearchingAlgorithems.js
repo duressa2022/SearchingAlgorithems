@@ -47,4 +47,27 @@ function preOrderSearch(array,root,key){
     return false
 
 }
-console.log(preOrderSearch([1,4,7,8,5,2,3],0,7))
+function inOrderSearch(array,root,key){
+    if(root<array.length){
+        left=inOrderSearch(array,root*2+1,key)
+        if(array[root]==key){
+            return true
+        }
+        right=inOrderSearch(array,root*2+2,key)
+        return left || right
+    
+    }
+    return false
+}
+function postOrderSearch(array,root,key){
+    if(root<array.length){
+        left=postOrderSearch(array,root*2+2,key)
+        right=postOrderSearch(array,root*2+2,key)
+        if(array[root]==key){
+            return true
+        }
+        return left ||right
+    }
+    return false
+}
+
